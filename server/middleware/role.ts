@@ -17,6 +17,6 @@ const checkRole = (...roles) => (req, res, next) => {
   return next();
 };
 
-const role = { ROLES, checkRole };
+const roleFromRole = { ROLES, checkRole };
 
-module.exports = role;
+module.exports = roleFromRole;

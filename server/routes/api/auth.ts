@@ -1,9 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const passport = require('passport');
+import express from 'express';
+// @ts-ignore
+const router = require(express.Router());
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import passport from 'passport';
 
 const auth = require('../../middleware/auth');
 
@@ -307,15 +308,15 @@ router.post('/reset', auth, (req, res) => {
   });
 });
 
-router.get(
-  '/google',
-  passport.authenticate('google', {
-    session: false,
-    scope: ['profile', 'email'],
-    accessType: 'offline',
-    approvalPrompt: 'force'
-  })
-);
+// router.get(
+//   '/google',
+//   passport.authenticate('google', {
+//     session: false,
+//     scope: ['profile', 'email'],
+//     accessType: 'offline',
+//     approvalPrompt: 'force'
+//   })
+// );
 
 router.get(
   '/google/callback',
@@ -339,7 +340,7 @@ router.get(
         // Redirect browser to root of application
         window.location.href = '/auth/success';
       </script>
-    </html>       
+    </html>
     `;
 
       res.send(htmlWithEmbeddedJWT);
@@ -377,7 +378,7 @@ router.get(
         // Redirect browser to root of application
         window.location.href = '/auth/success';
       </script>
-    </html>       
+    </html>
     `;
 
       res.send(htmlWithEmbeddedJWT);

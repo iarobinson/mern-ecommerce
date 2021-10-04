@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // Bring in Models & Helpers
@@ -14,6 +14,7 @@ router.post('/', auth, async (req, res) => {
       isLiked,
       updated: Date.now()
     };
+    // @ts-ignore
     const query = { product: update.product, user: user._id };
 
     const updatedWishlist = await Wishlist.findOneAndUpdate(query, update, {
@@ -30,7 +31,7 @@ router.post('/', auth, async (req, res) => {
       const wishlist = new Wishlist({
         product,
         isLiked,
-        user: user._id
+        // user: user._id
       });
 
       const wishlistDoc = await wishlist.save();
@@ -51,6 +52,7 @@ router.post('/', auth, async (req, res) => {
 // fetch wishlist api
 router.get('/', auth, async (req, res) => {
   try {
+    // @ts-ignore
     const user = req.user._id;
 
     const wishlist = await Wishlist.find({ user, isLiked: true })

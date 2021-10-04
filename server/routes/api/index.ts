@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const apiIndexRouter = require('express').Router();
 
 const authRoutes = require('./auth');
 const userRoutes = require('./user');
@@ -15,42 +15,42 @@ const reviewRoutes = require('./review');
 const wishlistRoutes = require('./wishlist');
 
 // auth routes
-router.use('/auth', authRoutes);
+apiIndexRouter.use('/auth', authRoutes);
 
 // user routes
-router.use('/user', userRoutes);
+apiIndexRouter.use('/user', userRoutes);
 
 // address routes
-router.use('/address', addressRoutes);
+apiIndexRouter.use('/address', addressRoutes);
 
 // newsletter routes
-router.use('/newsletter', newsletterRoutes);
+apiIndexRouter.use('/newsletter', newsletterRoutes);
 
 // product routes
-router.use('/product', productRoutes);
+apiIndexRouter.use('/product', productRoutes);
 
 // category routes
-router.use('/category', categoryRoutes);
+apiIndexRouter.use('/category', categoryRoutes);
 
 // brand routes
-router.use('/brand', brandRoutes);
+apiIndexRouter.use('/brand', brandRoutes);
 
 // contact routes
-router.use('/contact', contactRoutes);
+apiIndexRouter.use('/contact', contactRoutes);
 
 // merchant routes
-router.use('/merchant', merchantRoutes);
+apiIndexRouter.use('/merchant', merchantRoutes);
 
 // cart routes
-router.use('/cart', cartRoutes);
+apiIndexRouter.use('/cart', cartRoutes);
 
 // order routes
-router.use('/order', orderRoutes);
+apiIndexRouter.use('/order', orderRoutes);
 
 // Review routes
-router.use('/review', reviewRoutes);
+apiIndexRouter.use('/review', reviewRoutes);
 
 // Wishlist routes
-router.use('/wishlist', wishlistRoutes);
+apiIndexRouter.use('/wishlist', wishlistRoutes);
 
-module.exports = router;
+module.exports = apiIndexRouter;

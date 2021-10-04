@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+const contactRouter = express.Router();
 
 // Bring in Models & Helpers
 const Contact = require('../../models/contact');
-const mailgun = require('../../services/mailgun');
+// const mailgun = require('../../services/mailgun');
 
-router.post('/add', (req, res) => {
+contactRouter.post('/add', (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const message = req.body.message;
@@ -37,7 +37,7 @@ router.post('/add', (req, res) => {
       });
     }
 
-    await mailgun.sendEmail(email, 'contact');
+    // await mailgun.sendEmail(email, 'contact');
 
     res.status(200).json({
       success: true,
@@ -47,4 +47,4 @@ router.post('/add', (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = contactRouter;

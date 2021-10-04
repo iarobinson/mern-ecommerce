@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const StoreProduct = require('../models/product');
 const taxConfig = require('../config/tax');
 
 exports.disableProducts = products => {
@@ -11,7 +11,7 @@ exports.disableProducts = products => {
     };
   });
 
-  Product.bulkWrite(bulkOptions);
+  StoreProduct.bulkWrite(bulkOptions);
 };
 
 // calculate order tax amount
@@ -29,7 +29,7 @@ exports.caculateTaxAmount = order => {
       if (item.status !== 'Cancelled') {
         if (item.product?.taxable && item.priceWithTax === 0) {
           const taxAmount = price * (taxRate / 100) * 100;
-          item.totalTax = parseFloat(Number((taxAmount * quantity).toFixed(2)));
+          item.totalTax = parseFloat(String(Number((taxAmount * quantity).toFixed(2))));
 
           order.totalTax += item.totalTax;
         } else {
@@ -38,7 +38,7 @@ exports.caculateTaxAmount = order => {
       }
 
       item.priceWithTax = parseFloat(
-        Number((item.totalPrice + item.totalTax).toFixed(2))
+        String(Number((item.totalPrice + item.totalTax).toFixed(2)))
       );
     });
   }
@@ -48,21 +48,24 @@ exports.caculateTaxAmount = order => {
   );
 
   if (hasCancelledItems.length > 0) {
+    // @ts-ignore
     order.total = this.caculateOrderTotal(order);
   }
 
+  // @ts-ignore
   const currentTotal = this.caculateOrderTotal(order);
 
   if (currentTotal !== order.total) {
+    // @ts-ignore
     order.total = this.caculateOrderTotal(order);
   }
 
   order.totalWithTax = order.total + order.totalTax;
-  order.total = parseFloat(Number(order.total.toFixed(2)));
+  order.total = parseFloat(String(Number(order.total.toFixed(2))));
   order.totalTax = parseFloat(
-    Number(order.totalTax && order.totalTax.toFixed(2))
+    String(Number(order.totalTax && order.totalTax.toFixed(2)))
   );
-  order.totalWithTax = parseFloat(Number(order.totalWithTax.toFixed(2)));
+  order.totalWithTax = parseFloat(String(Number(order.totalWithTax.toFixed(2))));
   return order;
 };
 
@@ -86,14 +89,14 @@ exports.caculateItemsSalesTax = items => {
 
     const price = item.purchasePrice;
     const quantity = item.quantity;
-    item.totalPrice = parseFloat(Number((price * quantity).toFixed(2)));
+    item.totalPrice = parseFloat(String(Number((price * quantity).toFixed(2))));
 
     if (item.taxable) {
       const taxAmount = price * (taxRate / 100) * 100;
 
-      item.totalTax = parseFloat(Number((taxAmount * quantity).toFixed(2)));
+      item.totalTax = parseFloat(String(Number((taxAmount * quantity).toFixed(2))));
       item.priceWithTax = parseFloat(
-        Number((item.totalPrice + item.totalTax).toFixed(2))
+        String(Number((item.totalPrice + item.totalTax).toFixed(2)))
       );
     }
 

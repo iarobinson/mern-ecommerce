@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // Bring in Models & Helpers
@@ -71,9 +71,10 @@ router.get(
     try {
       let brands = null;
 
+      // @ts-ignore
       if (req.user.merchant) {
         brands = await Brand.find({
-          merchant: req.user.merchant
+          // merchant: req.user.merchant
         }).populate('merchant', 'name');
       } else {
         brands = await Brand.find({}).populate('merchant', 'name');
@@ -120,10 +121,11 @@ router.get(
     try {
       let brands = null;
 
+      // @ts-ignore
       if (req.user.merchant) {
         brands = await Brand.find(
           {
-            merchant: req.user.merchant
+            // merchant: req.user.merchant
           },
           'name'
         );

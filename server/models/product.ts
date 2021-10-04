@@ -1,4 +1,4 @@
-const Mongoose = require('mongoose');
+import Mongoose from 'mongoose';
 const slug = require('mongoose-slug-generator');
 const { Schema } = Mongoose;
 

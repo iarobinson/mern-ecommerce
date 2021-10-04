@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // Bring in Models & Helpers
@@ -16,6 +16,7 @@ router.get(
     try {
       const { search } = req.query;
 
+      // @ts-ignore
       const regex = new RegExp(search, 'i');
 
       const users = await User.find(
@@ -42,6 +43,7 @@ router.get(
 
 router.get('/', auth, async (req, res) => {
   try {
+    // @ts-ignore
     const user = req.user._id;
 
     const userDoc = await User.findById(user, { password: 0, _id: 0 });
@@ -58,6 +60,7 @@ router.get('/', auth, async (req, res) => {
 
 router.put('/', auth, async (req, res) => {
   try {
+    // @ts-ignore
     const user = req.user._id;
     const update = req.body.profile;
     const query = { _id: user };

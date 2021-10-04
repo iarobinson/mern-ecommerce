@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // Bring in Models & Helpers
@@ -9,6 +9,7 @@ const store = require('../../helpers/store');
 
 router.post('/add', auth, async (req, res) => {
   try {
+    // @ts-ignore
     const user = req.user._id;
     const items = req.body.products;
 

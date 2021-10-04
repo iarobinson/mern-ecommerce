@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
 
 // Bring in Models & Helpers
 const Merchant = require('../../models/merchant');

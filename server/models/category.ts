@@ -1,5 +1,5 @@
-const Mongoose = require('mongoose');
-const slug = require('mongoose-slug-generator');
+import Mongoose from 'mongoose';
+import slug from 'mongoose-slug-generator';
 const { Schema } = Mongoose;
 
 const options = {
@@ -13,7 +13,7 @@ Mongoose.plugin(slug, options);
 // Category Schema
 const CategorySchema = new Schema({
   _id: {
-    type: Schema.ObjectId,
+    // type: Schema.ObjectId,
     auto: true
   },
   name: {

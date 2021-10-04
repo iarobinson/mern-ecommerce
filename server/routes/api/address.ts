@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 // Bring in Models & Helpers
@@ -8,6 +8,7 @@ const auth = require('../../middleware/auth');
 router.post('/add', auth, (req, res) => {
   const user = req.user;
 
+  // @ts-ignore
   const address = new Address(Object.assign(req.body, { user: user._id }));
 
   address.save((err, data) => {
@@ -27,6 +28,7 @@ router.post('/add', auth, (req, res) => {
 
 // fetch all addresses api
 router.get('/', auth, (req, res) => {
+  // @ts-ignore
   Address.find({ user: req.user._id }, (err, data) => {
     if (err) {
       return res.status(400).json({

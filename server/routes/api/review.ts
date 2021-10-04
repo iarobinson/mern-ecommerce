@@ -1,14 +1,15 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+const reviewRouter = express.Router();
 
 // Bring in Models & Helpers
 const Review = require('../../models/review');
 const Product = require('../../models/product');
 const auth = require('../../middleware/auth');
 
-router.post('/add', auth, (req, res) => {
+reviewRouter.post('/add', auth, (req, res) => {
   const user = req.user;
 
+  // @ts-ignore
   const review = new Review(Object.assign(req.body, { user: user._id }));
 
   review.save((err, data) => {
@@ -26,7 +27,7 @@ router.post('/add', auth, (req, res) => {
   });
 });
 
-router.get('/', async (req, res) => {
+reviewRouter.get('/', async (req, res) => {
   try {
     const reviews = await Review.find({})
       .populate({
@@ -49,7 +50,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:slug', async (req, res) => {
+reviewRouter.get('/:slug', async (req, res) => {
   try {
     const productDoc = await Product.findOne({ slug: req.params.slug });
 
@@ -79,7 +80,7 @@ router.get('/:slug', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+reviewRouter.put('/:id', async (req, res) => {
   try {
     const reviewId = req.params.id;
     const update = req.body;
@@ -101,7 +102,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // approve review
-router.put('/approve/:reviewId', auth, async (req, res) => {
+reviewRouter.put('/approve/:reviewId', auth, async (req, res) => {
   try {
     const reviewId = req.params.reviewId;
 
@@ -126,7 +127,7 @@ router.put('/approve/:reviewId', auth, async (req, res) => {
 });
 
 // reject review
-router.put('/reject/:reviewId', auth, async (req, res) => {
+reviewRouter.put('/reject/:reviewId', auth, async (req, res) => {
   try {
     const reviewId = req.params.reviewId;
 
@@ -149,7 +150,7 @@ router.put('/reject/:reviewId', auth, async (req, res) => {
   }
 });
 
-router.delete('/delete/:id', async (req, res) => {
+reviewRouter.delete('/delete/:id', async (req, res) => {
   try {
     const review = await Review.deleteOne({ _id: req.params.id });
 
@@ -165,4 +166,4 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = reviewRouter;
