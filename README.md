@@ -1,5 +1,9 @@
 # MERN Ecommerce
 
+## Typescript Update
+
+In this specific fork, the existing MERN app will be converted to TypeScript.
+
 ## Description
 
 An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
